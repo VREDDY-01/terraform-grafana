@@ -21,7 +21,7 @@ resource "aws_lb" "swat-grafana-alb" {
 
 resource "aws_lb_target_group" "prometheus-tg" {
   name        = "prometheus-tg"
-  port        = 3000
+  port        = 9090
   protocol    = "HTTP"
   target_type = "instance"
   vpc_id = data.aws_vpc.default.id
@@ -30,12 +30,12 @@ resource "aws_lb_target_group" "prometheus-tg" {
 resource "aws_lb_target_group_attachment" "prometheus-attach" {
   target_group_arn = aws_lb_target_group.prometheus-tg.arn
   target_id        = var.target_id
-  port             = 3000
+  port             = 9090
 }
 
 resource "aws_lb_target_group" "node-tg" {
   name        = "node-tg"
-  port        = 9090
+  port        = 9100
   protocol    = "HTTP"
   target_type = "instance"
   vpc_id = data.aws_vpc.default.id
@@ -44,12 +44,12 @@ resource "aws_lb_target_group" "node-tg" {
 resource "aws_lb_target_group_attachment" "node-attach" {
   target_group_arn = aws_lb_target_group.node-tg.arn
   target_id        = var.target_id
-  port             = 9090
+  port             = 9100
 }
 
 resource "aws_lb_target_group" "grafana-tg" {
   name        = "grafana-tg"
-  port        = 9100
+  port        = 3000
   protocol    = "HTTP"
   target_type = "instance"
   vpc_id = data.aws_vpc.default.id
@@ -58,7 +58,7 @@ resource "aws_lb_target_group" "grafana-tg" {
 resource "aws_lb_target_group_attachment" "grafana-attach" {
   target_group_arn = aws_lb_target_group.grafana-tg.arn
   target_id        = var.target_id
-  port             = 9100
+  port             = 3000
 }
 
 resource "aws_lb_listener" "prometheus" {
