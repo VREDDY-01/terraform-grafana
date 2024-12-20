@@ -4,17 +4,13 @@ output "public_ip" {
 }
 
 output "grafana_url" {
-  value = "http://${module.aws_lb.lb_dns}:3000"
+  value = "http://${var.grafana_host_header}"
 }
 
 output "prometheus_url" {
-  value = "http://${module.aws_lb.lb_dns}:9090"
+  value = "http://${var.node_host_header}"
 }
 
 output "node_exporter_url" {
-  value = "http://${module.aws_lb.lb_dns}:9100"
-}
-
-output "scm_records" {
-  value = module.acm.records
+  value = "http://${var.prometheus_host_header}"
 }

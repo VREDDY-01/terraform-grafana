@@ -31,7 +31,18 @@ variable "public_key" {
   type        = string
 }
 
-variable "domain_name" {
-  description = "Domain name eg:abc.com"
-  type        = string
+variable "grafana_host_header" {
+  type = string
+}
+
+variable "node_host_header" {
+  type = string
+}
+
+variable "prometheus_host_header" {
+  type = string
+}
+
+variable "cert" {
+  type = string
 }

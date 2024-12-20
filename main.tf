@@ -17,10 +17,8 @@ module "aws_lb" {
   security_group_id = module.security_group.security_group_id
   tags = var.tags
   target_id = module.ec2_instance.instance_id
-}
-
-module "acm" {
-  source = "./modules/acm"
-  domain_name = var.domain_name
-  tags = var.tags
+  grafana_host_header = var.grafana_host_header
+  prometheus_host_header = var.prometheus_host_header
+  node_host_header = var.node_host_header
+  cert = var.cert
 }
